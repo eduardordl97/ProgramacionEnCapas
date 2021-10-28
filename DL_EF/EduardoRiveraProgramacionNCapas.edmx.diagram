@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="36ae42883c344621baf018ed80f0f04e" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.Area" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.Departamento" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.MetodoPago" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.Producto" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.Proveedor" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.VentaProducto" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="ERiveraProgramacionNCapasModel.FK__Departame__IdAre__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="ERiveraProgramacionNCapasModel.FK__Producto__IdDepa__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="ERiveraProgramacionNCapasModel.FK__Producto__IdProv__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="ERiveraProgramacionNCapasModel.FK__VentaProd__IdPro__239E4DCF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.Rol" Width="1.5" PointX="3.5" PointY="4.375" />
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.Usuario" Width="1.5" PointX="0.625" PointY="1.125" />
+        <AssociationConnector Association="ERiveraProgramacionNCapasModel.FK__Usuario__IdRol__3D5E1FD2" />
+        <EntityTypeShape EntityType="ERiveraProgramacionNCapasModel.Venta" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="ERiveraProgramacionNCapasModel.FK__Venta__IdMetodoP__1FCDBCEB" />
+        <AssociationConnector Association="ERiveraProgramacionNCapasModel.FK__Venta__IdUsuario__3F466844" />
+        <AssociationConnector Association="ERiveraProgramacionNCapasModel.FK__VentaProd__IdVen__22AA2996" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

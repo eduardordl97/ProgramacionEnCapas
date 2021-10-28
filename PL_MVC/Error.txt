@@ -1,0 +1,6 @@
+Hubo un error al añadir al usuario: userlayout1
+Hubo un error al añadir al usuario: userlayout3
+Hubo un error al añadir al usuario: userlayout4
+Hubo un error al añadir al usuario: userlayout5
+Hubo un error al añadir al usuario: userlayout2
+

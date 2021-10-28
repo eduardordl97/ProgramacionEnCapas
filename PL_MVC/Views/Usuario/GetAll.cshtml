@@ -1,0 +1,196 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/styles.css" />
+<link href="https://raw.githack.com/jamiebicknell/Toggle-Switch/master/toggleswitch.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Usuarios</h2>
+        </div>
+    </div>
+    <div class="row validation">
+        @using (Html.BeginForm("CargaMasiva", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="col-md-3">
+
+                <div class="form-group ">
+                    <div class="col-md-12">
+                        @*@Html.TextBox("file", "", new { type = "file" })*@
+                        <input type="file" name="ArchivoTXT" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Carga Masiva" class="btn btn-info" style=" margin-top:-5px; margin-bottom: 10px;" />
+                    </div>
+                </div>
+            </div>
+            
+
+        }
+    </div>
+
+    <div class="row validation">
+        @using (Html.BeginForm("GetAll", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="col-md-3">
+
+                <div class="form-group ">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "return SoloLetras(event,id,'lblErrorNombre' )", @placeholder = "Nombre" })
+                        
+                    
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group ">
+                    <div class="col-md-12">
+                     
+                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno", @onkeypress = "return SoloLetras(event,id,'lblErrorApellidoP')", @placeholder = "Apellido Paterno" })
+                        @*@Html.TextBoxFor(model => model.ApellidoPaterno.ToString(), new { @class = "form-control", @id = "txtApellidoPaterno", @onkeypress = "return SoloLetras(event,id,'lblErrorApellidoP')", @placeholder = "Apellido Paterno" })*@
+
+
+
+              
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group ">
+                    <div class="col-md-12">
+                     
+                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno", @onkeypress = "return SoloLetras(event,id,'lblErrorApellidoM')", @placeholder = "Apellido Materno" })
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Buscar" class="btn btn-info" style="margin-top:0px;" />
+                    </div>
+                </div>
+            </div>
+                    
+                   
+                   
+                
+           
+
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <h5>Seleccione un Usuario para editarlo o + para agregar...</h5>
+            <hr />
+        </div>
+        <div class="md-2" style="float:right;margin-bottom:10px;">
+            <a style="outline:0px;" class=" btn text-center" href="@Url.Action("Form", "Usuario")"><img src="~/Content/plus-square-solid-36.png" /></a>
+
+            @*@Html.ActionLink("+", "Form", "Producto", htmlAttributes: new { @class = " btn btn-success " })*@
+
+        </div>
+    </div>
+
+    @*<div class="row">*@
+    
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <td>Editar</td>
+                <td>Username</td>
+                <td>Nombre</td>
+                <td>Apellido Paterno</td>
+                <td>Apellido Materno</td>
+                <td>Email</td>
+                <td >Telefono</td>
+                <td>Sexo</td>
+                <td>Status</td>
+                <td class="hidden" >IdRol</td>
+                <td>Rol</td>
+                <td>Eliminar</td>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ML.Usuario usuario in Model.Usuarios)
+            {
+                <tr>
+                    <td class="text-center">
+                        <a style="outline:0px;" class="btn" href="@Url.Action("Form", "Usuario", new { Username = usuario.Username })"><img src="~/Content/edit-regular-36.png" /></a>
+                    </td>
+                    <td class="hidden">@usuario.Username</td>
+                    <td>@usuario.Username</td>
+                    <td class="text-center">@usuario.Nombre</td>
+                    <td class="text-center">@usuario.ApellidoPaterno</td>
+                    <td class="text-center">@usuario.ApellidoMaterno</td>
+                    <td>@usuario.Email</td>
+                    <td >@usuario.Telefono</td>
+                    <td>@usuario.Sexo</td>
+                    <td>
+                        @if (usuario.Status)
+                        {
+                            <p>Activo</p>
+                        }
+                        else
+                        {
+                            <p>Inactivo</p>
+                        }
+                    </td>
+                    <td class="hidden">@usuario.Rol.IdRol</td>
+                    <td>@usuario.Rol.Nombre</td>
+                  
+                    <td class="text-center">
+                        @if (usuario.Status)
+                        {
+
+
+                            <a href="@Url.Action("UpdateStatus", "Usuario", new { Username = usuario.Username })" class="toggler" onclick="return confirm('¿Estas seguro que deseas dar de baja a este usuario?');"></a>
+
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("UpdateStatus", "Usuario", new { Username = usuario.Username })" class="toggler off" onclick="return confirm('¿Estas seguro que deseas reactivar a este usuario?');"></a>
+                        }
+                      
+                        @*<a class="toggle toggle-on" href="@Url.Action("Delete", "Usuario", new { Username = usuario.Username })"></a>*@
+                    
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*</div>*@
+ 
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<script src="../../Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $('.toggler').click(function () {
+            $(this).toggleClass('off');
+        });
+        $('#toggle').click(function () {
+            $(this).toggleClass("down");
+        });
+    });
+  
+       
+</script>

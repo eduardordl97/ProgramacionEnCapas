@@ -1,0 +1,68 @@
+﻿@model ML.Result
+@{
+    ViewBag.Title = "AddCarrito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Carrito</h2>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr class="thead_carrito">
+            <td class="hidden">IdProducto</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Stock</td>
+            <td>Imagen</td>
+            <td>Cantidad</td>
+            <td>Eliminar</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Objects != null)
+        {
+            foreach (ML.VentaProducto ventaProducto in Model.Objects)
+            {
+                <tr>
+
+                    <td class="hidden">IdProducto</td>
+                    <td>@ventaProducto.Producto.Nombre</td>
+                    <td>@ventaProducto.Producto.PrecioUnitario</td>
+                    <td>@ventaProducto.Producto.Stock</td>
+                    <td class="text-center"><img src="data:image/jpeg;base64,@Convert.ToBase64String(ventaProducto.Producto.Imagen)" style=" height:100px; width:100px;" /></td>
+
+                    <td class="text-center col-md-4 ">
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <a style="outline:0px; height:10px;" class=" btn text-center" href="@Url.Action("", "Producto", new {  })"><img src="~/Content/minus-circle-solid-36.png" /></a>
+
+                            </div>
+                            <div class="col-md-3">
+                                
+                                @ventaProducto.Cantidad
+                                @*<input style=" width:60px; margin-top:12px" class="form-control" type="number" min="0" max="10">*@
+
+                            </div>
+                            <div class="col-md-4">
+                                <a style="outline:0px; margin-left:-62px; margin-top:3px;" class="btn" href="@Url.Action("Form", "Producto", new { })"><img src="~/Content/plus-circle-solid-36.png" /></a>
+
+
+                            </div>
+
+                        </div>
+
+                    </td>
+                    <td class="text-center">
+                        <a style="outline:0px;" class=" btn text-center" href="@Url.Action("Delete", "Producto", new {  })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><img src="~/Content/trash-solid-36.png" /></a>
+
+                    </td>
+
+                </tr>
+            }
+        }
+       
+
+    </tbody>
+</table>

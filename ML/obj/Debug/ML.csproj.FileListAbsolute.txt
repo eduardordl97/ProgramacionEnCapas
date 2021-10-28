@@ -1,0 +1,5 @@
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\ML\bin\Debug\ML.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\ML\bin\Debug\ML.pdb
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\ML\obj\Debug\ML.csprojResolveAssemblyReference.cache
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\ML\obj\Debug\ML.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\ML\obj\Debug\ML.pdb

@@ -1,0 +1,10 @@
+Hubo un error al añadir al usuario: userlayout1 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout3 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout4 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout5 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout2 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout1 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout3 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout4 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout5 Error: An error occurred while executing the command definition. See the inner exception for details.
+Hubo un error al añadir al usuario: userlayout2 Error: An error occurred while executing the command definition. See the inner exception for details.

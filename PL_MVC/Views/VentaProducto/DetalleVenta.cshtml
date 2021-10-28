@@ -1,0 +1,146 @@
+﻿@model ML.Result
+@{
+    ViewBag.Title = "DetalleVenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DetalleVenta</h2>
+
+<link rel="stylesheet" type="text/css" href="~/Content/styles.css" />
+<h2>Carrito</h2>
+
+<div class="md-12" style="float:right;margin-bottom:10px;">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Confirmar compra</button>
+
+    @*@Html.ActionLink("Confirmar Compra", "ModalProcesar", "Venta", htmlAttributes: new { @class = " btn btn-success " })*@
+</div>
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr class="thead_carrito">
+            <td class="hidden">IdProducto</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Stock</td>
+            <td>Subtotal</td>
+            <td>Imagen</td>
+            <td>Cantidad</td>
+            <td>Eliminar</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Objects != null)
+        {
+            foreach (ML.VentaProducto ventaProducto in Model.Objects)
+            {
+                <tr>
+
+                    <td class="hidden">IdProducto</td>
+                    <td>@ventaProducto.Producto.Nombre</td>
+                    <td>@ventaProducto.Producto.PrecioUnitario</td>
+                    <td>@ventaProducto.Producto.Stock</td>
+                    <td>@(ventaProducto.Producto.PrecioUnitario * ventaProducto.Cantidad)</td>
+                    <td class="text-center"><img src="data:image/jpeg;base64,@Convert.ToBase64String(ventaProducto.Producto.Imagen)" style=" height:100px; width:100px;" /></td>
+
+                    <td class="text-center col-md-4 ">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                @*<a style="outline:0px; height:10px;" class=" btn text-center" href="@Url.Action("Menos", "Venta", new { IdProducto = ventaProducto.Producto.IdProducto })"><img src="~/Content/minus-circle-solid-36.png" /></a>*@
+                                @if (ventaProducto.Cantidad == 1)
+                                {
+                                    <a style="outline:0px; height:10px;" class=" btn text-center" href="@Url.Action("DeleteCarrito", "Venta", new { IdProducto = ventaProducto.Producto.IdProducto })" onclick="return confirm('¿Estas seguro que deseas eliminar este producto del carrito?');"><img src="~/Content/minus-circle-solid-36.png" /></a>
+                                }
+                                else
+                                {
+                                    <a style="outline:0px; height:10px;" class=" btn text-center" href="@Url.Action("Menos", "Venta", new { IdProducto = ventaProducto.Producto.IdProducto })"><img src="~/Content/minus-circle-solid-36.png" /></a>
+
+                                }
+                            </div>
+                            <div class="col-md-4 div_cantidad">
+                                <p id="p_cantidad" style="margin-top:3px;">@ventaProducto.Cantidad</p>
+
+                                @*<input style=" width:60px; margin-top:12px" class="form-control" type="number" min="0" max="10">*@
+
+                            </div>
+                            <div class="col-md-4">
+                                @if (ventaProducto.Cantidad == ventaProducto.Producto.Stock)
+                                {
+                                    <a style="outline:0px; margin-left:-62px; margin-top:3px;" class=" btn text-center" href="#" onclick="return confirm('No hay suficiente Stock de este producto');"><img src="~/Content/plus-circle-solid-36.png" /></a>
+
+
+                                }
+                                else
+                                {
+                                    <a style="outline:0px; margin-left:-62px; margin-top:3px;" class="btn" href="@Url.Action("Mas", "Venta", new { IdProducto = ventaProducto.Producto.IdProducto })"><img src="~/Content/plus-circle-solid-36.png" /></a>
+
+                                }
+
+
+                            </div>
+
+                        </div>
+
+                    </td>
+                    <td class="text-center">
+                        <a style="outline:0px;" class=" btn text-center" href="@Url.Action("DeleteCarrito", "Venta", new { IdProducto = ventaProducto.Producto.IdProducto })" onclick="return confirm('¿Estas seguro que deseas eliminar este producto del carrito?');"><img src="~/Content/trash-solid-36.png" /></a>
+
+                    </td>
+
+                </tr>
+
+
+
+
+            }
+
+
+        }
+
+    </tbody>
+</table>
+
+@if (Model.Objects != null)
+{
+    <div class="col-md-12">
+        @{
+    decimal Total = 0;
+    foreach (ML.VentaProducto ventaProducto in Model.Objects)
+    {
+        Total += ventaProducto.Cantidad * ventaProducto.Producto.PrecioUnitario;
+    }
+        }
+
+        <p style="float:right;">Total = @Total </p>
+
+
+    </div>
+}
+
+
+
+
+
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Compra</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea finalizar su compra?</p>
+            </div>
+            <div class="modal-footer">
+                @Html.ActionLink("Confirmar Compra", "Procesar", "Venta", htmlAttributes: new { @class = " btn btn-success " })
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>

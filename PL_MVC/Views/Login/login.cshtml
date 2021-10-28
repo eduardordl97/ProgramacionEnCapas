@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "login";
+    Layout = null;
+}
+@model ML.Usuario
+
+<link rel="stylesheet" href="~/Content/Login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+<body>
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+    {   
+    <div class="login">
+        <div class="account-login">
+           
+            <form action="" class="login-form">
+                <div class="form-group">
+                    <h1 class="text-center loginTitle">Bienvenido</h1>
+                </div>
+                <div class="form-group">
+                   
+                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Usuario", type = "text" }) @*Caja de texto*@
+                   
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password" }) @*Caja de texto*@
+
+
+                    
+                </div>
+                @*<div class="remember">
+                    <label class="custom-checkbox">
+                        Remember me
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <a href="#" class="pull-right">Forgot Password?</a>
+                </div>*@
+                <input class="btn" type="submit" value="Iniciar sesión" />
+               
+                @*<p>Are you new?<a href="#">Sign Up</a></p>*@
+            </form>
+        </div>
+    </div>
+    }
+</body>

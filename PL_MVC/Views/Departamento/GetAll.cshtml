@@ -1,0 +1,68 @@
+﻿@model ML.Departamento
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Departamentos</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Seleccione un departamento para editarlo o + para agregar...</h5>
+            <hr />
+        </div>
+
+    </div>
+
+    @*<div class="row">*@
+    <div class="md-10" style="float:right;margin-bottom:10px;">
+        @Html.ActionLink("+", "Form", "Departamento", htmlAttributes: new { @class = " btn btn-success " })
+
+    </div>
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <td><b>Editar</b></td>
+                <td class="hidden"><b>IdDepartamento</b></td>
+                <td><b>Nombre</b></td>
+                <td class="hidden">IdArea</td>
+                <td><b>Área</b></td>
+                <td><b>Eliminar</b> </td>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ML.Departamento departamento in Model.Departamentos)
+            {
+                <tr>
+                    <td class="text-center">
+                        <a style="outline:0px;" class="btn  " href="@Url.Action("Form", "Departamento", new { IdDepartamento = departamento.IdDepartamento })"><img src="~/Content/edit-regular-36.png" /></a>
+                    </td>
+                    <td class="hidden">@departamento.IdDepartamento</td>
+                    <td >@departamento.Nombre</td>
+                    <td class="hidden">@departamento.Area.IdArea</td>
+                    <td>@departamento.Area.Nombre</td>
+           
+                    @*<td class="hidden">@materia.Semestre.IdSemestre</td>*@
+                    @*<td>@materia.Semestre.Nombre</td>*@
+                    <td class="text-center">
+
+                        <a class="btn" style="outline:0px;" href="@Url.Action("Delete", "Departamento", new { IdDepartamento = departamento.IdDepartamento })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><img src="~/Content/trash-solid-36.png" /></a>
+                    </td>
+                  
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*</div>*@
+
+</div>
+

@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ERiveraProgramacionNCapasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="IdArea" />
+    </Key>
+    <Property Name="IdArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Departamentoes" Relationship="Self.FK__Departame__IdAre__145C0A3F" FromRole="Area" ToRole="Departamento" />
+  </EntityType>
+  <EntityType Name="Departamento">
+    <Key>
+      <PropertyRef Name="IdDepartamento" />
+    </Key>
+    <Property Name="IdDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IdArea" Type="Int32" />
+    <NavigationProperty Name="Area" Relationship="Self.FK__Departame__IdAre__145C0A3F" FromRole="Departamento" ToRole="Area" />
+    <NavigationProperty Name="Productoes" Relationship="Self.FK__Producto__IdDepa__1BFD2C07" FromRole="Departamento" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="MetodoPago">
+    <Key>
+      <PropertyRef Name="IdMetodoPago" />
+    </Key>
+    <Property Name="IdMetodoPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="Byte" />
+    <NavigationProperty Name="Ventas" Relationship="ERiveraProgramacionNCapasModel.FK__Venta__IdMetodoP__1FCDBCEB" FromRole="MetodoPago" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="IdProducto" />
+    </Key>
+    <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="PrecioUnitario" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="IdProveedor" Type="Int32" />
+    <Property Name="IdDepartamento" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Departamento" Relationship="Self.FK__Producto__IdDepa__1BFD2C07" FromRole="Producto" ToRole="Departamento" />
+    <NavigationProperty Name="Proveedor" Relationship="Self.FK__Producto__IdProv__1B0907CE" FromRole="Producto" ToRole="Proveedor" />
+    <NavigationProperty Name="VentaProductoes" Relationship="Self.FK__VentaProd__IdPro__239E4DCF" FromRole="Producto" ToRole="VentaProducto" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="IdProveedor" />
+    </Key>
+    <Property Name="IdProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Productoes" Relationship="Self.FK__Producto__IdProv__1B0907CE" FromRole="Proveedor" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="VentaProducto">
+    <Key>
+      <PropertyRef Name="IdVentaProducto" />
+    </Key>
+    <Property Name="IdVentaProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdVenta" Type="Int32" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="IdProducto" Type="Int32" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK__VentaProd__IdPro__239E4DCF" FromRole="VentaProducto" ToRole="Producto" />
+    <NavigationProperty Name="Venta" Relationship="ERiveraProgramacionNCapasModel.FK__VentaProd__IdVen__22AA2996" FromRole="VentaProducto" ToRole="Venta" />
+  </EntityType>
+  <Association Name="FK__Departame__IdAre__145C0A3F">
+    <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+    <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="IdArea" />
+      </Principal>
+      <Dependent Role="Departamento">
+        <PropertyRef Name="IdArea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Producto__IdDepa__1BFD2C07">
+    <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamento">
+        <PropertyRef Name="IdDepartamento" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IdDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Producto__IdProv__1B0907CE">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="IdProveedor" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IdProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaProd__IdPro__239E4DCF">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+    <End Role="VentaProducto" Type="Self.VentaProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="VentaProducto">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ERiveraProgramacionNCapasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Areas" EntityType="Self.Area" />
+    <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
+    <EntitySet Name="MetodoPagoes" EntityType="Self.MetodoPago" />
+    <EntitySet Name="Productoes" EntityType="Self.Producto" />
+    <EntitySet Name="Proveedors" EntityType="Self.Proveedor" />
+    <EntitySet Name="VentaProductoes" EntityType="Self.VentaProducto" />
+    <AssociationSet Name="FK__Departame__IdAre__145C0A3F" Association="Self.FK__Departame__IdAre__145C0A3F">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="Departamento" EntitySet="Departamentoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Producto__IdDepa__1BFD2C07" Association="Self.FK__Producto__IdDepa__1BFD2C07">
+      <End Role="Departamento" EntitySet="Departamentoes" />
+      <End Role="Producto" EntitySet="Productoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Producto__IdProv__1B0907CE" Association="Self.FK__Producto__IdProv__1B0907CE">
+      <End Role="Proveedor" EntitySet="Proveedors" />
+      <End Role="Producto" EntitySet="Productoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaProd__IdPro__239E4DCF" Association="Self.FK__VentaProd__IdPro__239E4DCF">
+      <End Role="Producto" EntitySet="Productoes" />
+      <End Role="VentaProducto" EntitySet="VentaProductoes" />
+    </AssociationSet>
+    <FunctionImport Name="DepartamentoAdd">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="IdArea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DepartamentoDelete">
+      <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DepartamentoGetById" ReturnType="Collection(ERiveraProgramacionNCapasModel.DepartamentoGetById_Result)">
+      <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DepartamentoUpdate">
+      <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="IdArea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProductoDelete">
+      <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProductUpdate">
+      <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="PrecioUnitario" Mode="In" Type="Decimal" />
+      <Parameter Name="Stock" Mode="In" Type="Int32" />
+      <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+      <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="VentaGetById" ReturnType="Collection(ERiveraProgramacionNCapasModel.VentaGetById_Result)">
+      <Parameter Name="IdVenta" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="VentaProductoAdd">
+      <Parameter Name="IdVenta" Mode="In" Type="Int32" />
+      <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+      <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AreaGetAll" ReturnType="Collection(ERiveraProgramacionNCapasModel.AreaGetAll_Result)" />
+    <FunctionImport Name="DepartamentoGetAll" ReturnType="Collection(ERiveraProgramacionNCapasModel.DepartamentoGetAll_Result)" />
+    <FunctionImport Name="ProveedorGetAll" ReturnType="Collection(ERiveraProgramacionNCapasModel.ProveedorGetAll_Result)" />
+    <FunctionImport Name="AreaGetById" ReturnType="Collection(ERiveraProgramacionNCapasModel.AreaGetById_Result)">
+      <Parameter Name="IdArea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProductoAdd">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="PrecioUnitario" Mode="In" Type="Decimal" />
+      <Parameter Name="Stock" Mode="In" Type="Int32" />
+      <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+      <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="ProductoGetById" ReturnType="Collection(ERiveraProgramacionNCapasModel.ProductoGetById_Result)">
+      <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProductoUpdate">
+      <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="PrecioUnitario" Mode="In" Type="Decimal" />
+      <Parameter Name="Stock" Mode="In" Type="Int32" />
+      <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+      <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="Imagen" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="ProductoGetByIdDepartamento" ReturnType="Collection(ERiveraProgramacionNCapasModel.ProductoGetByIdDepartamento_Result)">
+      <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Rols" EntityType="ERiveraProgramacionNCapasModel.Rol" />
+    <EntitySet Name="Usuarios" EntityType="ERiveraProgramacionNCapasModel.Usuario" />
+    <AssociationSet Name="FK__Usuario__IdRol__3D5E1FD2" Association="ERiveraProgramacionNCapasModel.FK__Usuario__IdRol__3D5E1FD2">
+      <End Role="Rol" EntitySet="Rols" />
+      <End Role="Usuario" EntitySet="Usuarios" />
+    </AssociationSet>
+    <FunctionImport Name="ProveedorGetById" ReturnType="Collection(ERiveraProgramacionNCapasModel.ProveedorGetById_Result)">
+      <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Ventas" EntityType="ERiveraProgramacionNCapasModel.Venta" />
+    <AssociationSet Name="FK__Venta__IdMetodoP__1FCDBCEB" Association="ERiveraProgramacionNCapasModel.FK__Venta__IdMetodoP__1FCDBCEB">
+      <End Role="MetodoPago" EntitySet="MetodoPagoes" />
+      <End Role="Venta" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Venta__IdUsuario__3F466844" Association="ERiveraProgramacionNCapasModel.FK__Venta__IdUsuario__3F466844">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Venta" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VentaProd__IdVen__22AA2996" Association="ERiveraProgramacionNCapasModel.FK__VentaProd__IdVen__22AA2996">
+      <End Role="Venta" EntitySet="Ventas" />
+      <End Role="VentaProducto" EntitySet="VentaProductoes" />
+    </AssociationSet>
+    <FunctionImport Name="VentaAdd">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Total" Mode="In" Type="Decimal" />
+      <Parameter Name="IdMetodoPago" Mode="In" Type="Int32" />
+      <Parameter Name="IdVenta" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UsuarioGetAll" />
+    <FunctionImport Name="UsuarioGetById" ReturnType="Collection(ERiveraProgramacionNCapasModel.UsuarioGetById_Result)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="RolGetAll" ReturnType="Collection(ERiveraProgramacionNCapasModel.RolGetAll_Result)" />
+    <FunctionImport Name="GetByIdVenta" ReturnType="Collection(ERiveraProgramacionNCapasModel.GetByIdVenta_Result)">
+      <Parameter Name="IdVenta" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UsuarioAdd">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+      <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="Binary" />
+      <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="Sexo" Mode="In" Type="String" />
+      <Parameter Name="IdRol" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UsuarioUpdate">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+      <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="Binary" />
+      <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="Sexo" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+      <Parameter Name="IdRol" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UsuarioDelete">
+      <Parameter Name="Username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UsuarioGetAll1" ReturnType="Collection(ERiveraProgramacionNCapasModel.UsuarioGetAll1_Result)">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+      <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ProductoGetAll" ReturnType="Collection(ERiveraProgramacionNCapasModel.ProductoGetAll_Result)" />
+  </EntityContainer>
+  <ComplexType Name="DepartamentoGetById_Result">
+    <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="IdArea" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="VentaGetById_Result">
+    <Property Type="Int32" Name="IdVenta" Nullable="false" />
+    <Property Type="Int32" Name="IdCliente" Nullable="true" />
+    <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="IdMetodoPago" Nullable="true" />
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="AreaGetAll_Result">
+    <Property Type="Int32" Name="IdArea" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="DepartamentoGetAll_Result">
+    <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="IdArea" Nullable="true" />
+    <Property Type="String" Name="AreaNombre" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ProveedorGetAll_Result">
+    <Property Type="Int32" Name="IdProveedor" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="AreaGetById_Result">
+    <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="IdArea" Nullable="true" />
+    <Property Type="String" Name="NombreArea" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ProductoGetById_Result">
+    <Property Type="Int32" Name="IdProducto" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="PrecioUnitario" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Int32" Name="Stock" Nullable="true" />
+    <Property Type="Int32" Name="IdProveedor" Nullable="true" />
+    <Property Type="Int32" Name="IdDepartamento" Nullable="true" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="500" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Int32" Name="IdArea" Nullable="true" />
+    <Property Type="String" Name="NombreArea" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NombreProveedor" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ProductoGetByIdDepartamento_Result">
+    <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="IdProducto" Nullable="false" />
+    <Property Type="String" Name="NombreProducto" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="PrecioUnitario" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="Stock" Nullable="true" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="500" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="ERiveraProgramacionNCapasModel.FK__Usuario__IdRol__3D5E1FD2" FromRole="Rol" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Sexo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="IdRol" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Rol" Relationship="ERiveraProgramacionNCapasModel.FK__Usuario__IdRol__3D5E1FD2" FromRole="Usuario" ToRole="Rol" />
+    <NavigationProperty Name="Ventas" Relationship="ERiveraProgramacionNCapasModel.FK__Venta__IdUsuario__3F466844" FromRole="Usuario" ToRole="Venta" />
+  </EntityType>
+  <Association Name="FK__Usuario__IdRol__3D5E1FD2">
+    <End Type="ERiveraProgramacionNCapasModel.Rol" Role="Rol" Multiplicity="0..1" />
+    <End Type="ERiveraProgramacionNCapasModel.Usuario" Role="Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="ProveedorGetById_Result">
+    <Property Type="Int32" Name="IdProveedor" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="NombreProducto" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="IdProveedorProducto" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="IdVenta" />
+    </Key>
+    <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdMetodoPago" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="MetodoPago" Relationship="ERiveraProgramacionNCapasModel.FK__Venta__IdMetodoP__1FCDBCEB" FromRole="Venta" ToRole="MetodoPago" />
+    <NavigationProperty Name="Usuario" Relationship="ERiveraProgramacionNCapasModel.FK__Venta__IdUsuario__3F466844" FromRole="Venta" ToRole="Usuario" />
+    <NavigationProperty Name="VentaProductoes" Relationship="ERiveraProgramacionNCapasModel.FK__VentaProd__IdVen__22AA2996" FromRole="Venta" ToRole="VentaProducto" />
+  </EntityType>
+  <Association Name="FK__Venta__IdMetodoP__1FCDBCEB">
+    <End Type="ERiveraProgramacionNCapasModel.MetodoPago" Role="MetodoPago" Multiplicity="0..1" />
+    <End Type="ERiveraProgramacionNCapasModel.Venta" Role="Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MetodoPago">
+        <PropertyRef Name="IdMetodoPago" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="IdMetodoPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Venta__IdUsuario__3F466844">
+    <End Type="ERiveraProgramacionNCapasModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="ERiveraProgramacionNCapasModel.Venta" Role="Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VentaProd__IdVen__22AA2996">
+    <End Type="ERiveraProgramacionNCapasModel.Venta" Role="Venta" Multiplicity="0..1" />
+    <End Type="ERiveraProgramacionNCapasModel.VentaProducto" Role="VentaProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="IdVenta" />
+      </Principal>
+      <Dependent Role="VentaProducto">
+        <PropertyRef Name="IdVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="UsuarioGetById_Result">
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="Binary" Name="Password" Nullable="true" />
+    <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Sexo" Nullable="true" MaxLength="15" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="Int32" Name="IdRol" Nullable="true" />
+    <Property Type="String" Name="NombreRol" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="RolGetAll_Result">
+    <Property Type="Int32" Name="IdRol" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="GetByIdVenta_Result">
+    <Property Type="Int32" Name="IdVentaProducto" Nullable="false" />
+    <Property Type="Int32" Name="IdVenta" Nullable="true" />
+    <Property Type="Int32" Name="Cantidad" Nullable="true" />
+    <Property Type="Int32" Name="IdProducto" Nullable="true" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="PrecioUnitario" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Cliente" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IdMetodoPago" Nullable="true" />
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="UsuarioGetAll1_Result">
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="Binary" Name="Password" Nullable="true" />
+    <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Sexo" Nullable="true" MaxLength="15" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="Int32" Name="IdRol" Nullable="true" />
+    <Property Type="String" Name="NombreRol" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="ProductoGetAll_Result">
+    <Property Type="Int32" Name="IdProducto" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="PrecioUnitario" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="Stock" Nullable="true" />
+    <Property Type="Int32" Name="IdProveedor" Nullable="true" />
+    <Property Type="Int32" Name="IdDepartamento" Nullable="true" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="500" />
+    <Property Type="Binary" Name="Imagen" Nullable="true" />
+    <Property Type="String" Name="NombreProveedor" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="NombreDepartamento" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="IdArea" Nullable="true" />
+    <Property Type="String" Name="NombreArea" Nullable="true" MaxLength="100" />
+  </ComplexType>
+</Schema>

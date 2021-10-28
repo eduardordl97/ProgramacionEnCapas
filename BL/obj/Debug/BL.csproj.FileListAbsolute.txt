@@ -1,0 +1,16 @@
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\BL.dll.config
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\BL.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\BL.pdb
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\DL.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\DL_EF.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\EntityFramework.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\ML.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\DL.pdb
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\DL_EF.pdb
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\ML.pdb
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\EntityFramework.xml
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\obj\Debug\BL.csprojResolveAssemblyReference.cache
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\obj\Debug\BL.dll
+C:\Users\ALIEN 14\Documents\EDUARDO RIVERA DE LUCIO\ERiveraProgramacionNCapas\BL\obj\Debug\BL.pdb
